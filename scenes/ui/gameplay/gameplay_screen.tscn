@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://3y2qy8785ch4"]
+[gd_scene load_steps=4 format=3 uid="uid://3y2qy8785ch4"]
 
 [ext_resource type="PackedScene" uid="uid://k23gk7g8k3uv" path="res://scenes/objects/playfeild.tscn" id="1_8itko"]
+[ext_resource type="Script" path="res://scenes/ui/gameplay/gameplay_screen.gd" id="1_oq4uo"]
+[ext_resource type="PackedScene" uid="uid://dpu86v5mfb48i" path="res://scenes/ui/gameplay/gameplay_hud.tscn" id="2_22hms"]
 
 [node name="Gameplay Screen" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 256.0
 offset_bottom = 384.0
+script = ExtResource("1_oq4uo")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -24,3 +27,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Playfeild" parent="Control/Control" instance=ExtResource("1_8itko")]
+
+[node name="Gameplay HUD" parent="." instance=ExtResource("2_22hms")]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -192.0
+offset_bottom = 0.0
+grow_vertical = 0
+
+[connection signal="note_hit" from="Control/Control/Playfeild" to="." method="_on_playfeild_note_hit"]

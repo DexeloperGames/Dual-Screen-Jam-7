@@ -7,6 +7,7 @@ func _ready():
 	load_chart()
 	pass # Replace with function body.
 
+signal note_hit(note : Note,offset : float)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -34,3 +35,23 @@ func load_chart():
 		note_column.note_hit_time_array.append(hit_time)
 	for note_column in note_columns:
 		note_column.spawn_notes()
+
+
+func _on_note_column_0_note_hit(note, offset):
+	emit_signal("note_hit",note,offset)
+	pass # Replace with function body.
+
+
+func _on_note_column_1_note_hit(note, offset):
+	emit_signal("note_hit",note,offset)
+	pass # Replace with function body.
+
+
+func _on_note_column_2_note_hit(note, offset):
+	emit_signal("note_hit",note,offset)
+	pass # Replace with function body.
+
+
+func _on_note_column_3_note_hit(note, offset):
+	emit_signal("note_hit",note,offset)
+	pass # Replace with function body.

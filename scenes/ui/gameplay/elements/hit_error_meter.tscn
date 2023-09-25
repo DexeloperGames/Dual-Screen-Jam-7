@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciknkihlil2om"]
+
+[ext_resource type="Script" path="res://scenes/ui/gameplay/elements/hit_error_meter.gd" id="1_sgbgx"]
+
+[node name="Hit Error Meter" type="Node2D" groups=["Player Hit Recievers"]]
+script = ExtResource("1_sgbgx")
+max_width = 40
+
+[node name="Hit Line Container" type="Node2D" parent="."]
+
+[node name="Average Line" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 20, 0, -20)
+width = 3.0

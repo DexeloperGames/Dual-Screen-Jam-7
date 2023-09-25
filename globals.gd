@@ -1,6 +1,7 @@
 extends Node
 
 var note_colors : Array[Color] = [Color.MAGENTA, Color.CYAN, Color.GREEN, Color.RED]
+var good_hit_time = 50
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

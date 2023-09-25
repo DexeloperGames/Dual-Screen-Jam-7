@@ -2,33 +2,34 @@
 
 [ext_resource type="PackedScene" uid="uid://jprmmkkkq0b0" path="res://scenes/objects/note_column.tscn" id="1_rpp22"]
 [ext_resource type="Script" path="res://scenes/objects/playfeild.gd" id="1_w1mkr"]
-[ext_resource type="Resource" uid="uid://b5uh043g0d00d" path="res://data/charts/impossibletestsong.tres" id="2_ko7ny"]
+[ext_resource type="Resource" uid="uid://bx50lhq6kn0sk" path="res://data/charts/impossibletestsong copy.tres" id="2_mprwd"]
 [ext_resource type="AudioStream" uid="uid://d1b52dbuq085r" path="res://assets/some new test song lol.wav" id="4_gpsol"]
 
 [node name="Playfeild" type="Node2D" node_paths=PackedStringArray("note_columns")]
 script = ExtResource("1_w1mkr")
-chart = ExtResource("2_ko7ny")
-note_columns = [NodePath("Note Column"), NodePath("Note Column2"), NodePath("Note Column3"), NodePath("Note Column4")]
+chart = ExtResource("2_mprwd")
+note_columns = [NodePath("Note Column 0"), NodePath("Note Column 1"), NodePath("Note Column 2"), NodePath("Note Column 3")]
 
-[node name="Note Column" parent="." instance=ExtResource("1_rpp22")]
+[node name="Note Column 0" parent="." instance=ExtResource("1_rpp22")]
 position = Vector2(-96, 0)
-auto_play = true
 
-[node name="Note Column2" parent="." instance=ExtResource("1_rpp22")]
+[node name="Note Column 1" parent="." instance=ExtResource("1_rpp22")]
 position = Vector2(-32, 0)
 note_index = 1
-auto_play = true
 
-[node name="Note Column3" parent="." instance=ExtResource("1_rpp22")]
+[node name="Note Column 2" parent="." instance=ExtResource("1_rpp22")]
 position = Vector2(32, 0)
 note_index = 2
-auto_play = true
 
-[node name="Note Column4" parent="." instance=ExtResource("1_rpp22")]
+[node name="Note Column 3" parent="." instance=ExtResource("1_rpp22")]
 position = Vector2(96, 0)
 note_index = 3
-auto_play = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_gpsol")
 autoplay = true
+
+[connection signal="note_hit" from="Note Column 0" to="." method="_on_note_column_0_note_hit"]
+[connection signal="note_hit" from="Note Column 1" to="." method="_on_note_column_1_note_hit"]
+[connection signal="note_hit" from="Note Column 2" to="." method="_on_note_column_2_note_hit"]
+[connection signal="note_hit" from="Note Column 3" to="." method="_on_note_column_3_note_hit"]

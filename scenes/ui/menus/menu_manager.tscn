@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyast757jqikq"]
+
+[ext_resource type="Script" path="res://scenes/ui/menus/menu_manager.gd" id="1_kdluh"]
+[ext_resource type="PackedScene" uid="uid://bws67cngnroie" path="res://scenes/ui/menus/main_menu.tscn" id="2_ytpin"]
+
+[node name="Menu Manager" type="Control" groups=["Menu Managers"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 384.0
+script = ExtResource("1_kdluh")
+
+[node name="Current Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main Menu" parent="Current Menu" instance=ExtResource("2_ytpin")]

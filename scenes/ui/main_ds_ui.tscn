@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://gt023i3enqw1"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_ds_ui.gd" id="1_6uvt6"]
+[ext_resource type="Shader" uid="uid://duinjk65muqv0" path="res://scenes/ui/main_ds_screen_shader.tres" id="1_ax2tv"]
+[ext_resource type="PackedScene" uid="uid://dvd87t1h7fp8m" path="res://scenes/ui/main_ds_screen.tscn" id="1_ej1tp"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qm7an"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lya1x"]
+resource_local_to_scene = true
+shader = ExtResource("1_ax2tv")
+shader_parameter/Screen_Start = null
+shader_parameter/Screen_End = 0.5
+shader_parameter/DS_Screen = SubResource("ViewportTexture_qm7an")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_e3t1j"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n64ot"]
+resource_local_to_scene = true
+shader = ExtResource("1_ax2tv")
+shader_parameter/Screen_Start = 0.5
+shader_parameter/Screen_End = 1.0
+shader_parameter/DS_Screen = SubResource("ViewportTexture_e3t1j")
+
+[node name="Main DS UI" type="Control" node_paths=PackedStringArray("top_screen", "bottom_screen", "screen_viewport")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6uvt6")
+top_screen = NodePath("AspectRatioContainer/VBoxContainer/AspectRatioContainer/Top Screen")
+bottom_screen = NodePath("AspectRatioContainer/VBoxContainer/AspectRatioContainer2/Bottom Screen")
+screen_viewport = NodePath("SubViewportContainer/SubViewport")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(256, 384)
+render_target_update_mode = 4
+
+[node name="Main DS Screen" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ej1tp")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.345098, 0.352941, 1, 1)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 0.6667
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+ratio = 1.3333
+
+[node name="Top Screen" type="ColorRect" parent="AspectRatioContainer/VBoxContainer/AspectRatioContainer"]
+material = SubResource("ShaderMaterial_lya1x")
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.03
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+ratio = 1.3333
+
+[node name="Bottom Screen" type="ColorRect" parent="AspectRatioContainer/VBoxContainer/AspectRatioContainer2"]
+material = SubResource("ShaderMaterial_n64ot")
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 666.0
+offset_right = 624.0
+offset_bottom = 924.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "test"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "test"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "test"
+
+[connection signal="gui_input" from="AspectRatioContainer/VBoxContainer/AspectRatioContainer/Top Screen" to="." method="_on_top_screen_gui_input"]
+[connection signal="gui_input" from="AspectRatioContainer/VBoxContainer/AspectRatioContainer2/Bottom Screen" to="." method="_on_bottom_screen_gui_input"]

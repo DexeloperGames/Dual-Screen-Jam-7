@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvd87t1h7fp8m"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_ds_screen.gd" id="1_jgg2o"]
+[ext_resource type="PackedScene" uid="uid://cyast757jqikq" path="res://scenes/ui/menus/menu_manager.tscn" id="2_ixh6n"]
+
+[node name="Main DS Screen" type="Control" groups=["Screen Managers"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 384.0
+script = ExtResource("1_jgg2o")
+
+[node name="Current Screen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu Manager" parent="Current Screen" instance=ExtResource("2_ixh6n")]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://jprmmkkkq0b0"]
+
+[ext_resource type="Shader" uid="uid://d1tvy1qt6ursg" path="res://scenes/objects/note_receptacle_material.tres" id="1_qyueh"]
+[ext_resource type="Script" path="res://scenes/objects/note_column.gd" id="1_rv7is"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18yan"]
+shader = ExtResource("1_qyueh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3jvfo"]
+size = Vector2(64, 64)
+
+[node name="Note Column" type="Node2D" node_paths=PackedStringArray("note_scroller", "note_scroll_speed_scaler")]
+script = ExtResource("1_rv7is")
+note_scroller = NodePath("Scroll Speed Scaler/Note Scroller")
+note_scroll_speed_scaler = NodePath("Scroll Speed Scaler")
+
+[node name="Note Receptacle" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_18yan")
+mesh = SubResource("QuadMesh_3jvfo")
+
+[node name="Scroll Speed Scaler" type="Marker2D" parent="."]
+
+[node name="Note Scroller" type="Marker2D" parent="Scroll Speed Scaler"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjifjexmv0pij"]
+
+[ext_resource type="Script" path="res://scenes/objects/note.gd" id="1_iebwg"]
+[ext_resource type="Shader" uid="uid://osc11c1s4uyx" path="res://scenes/objects/note_shader.tres" id="1_jopj1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mbg6n"]
+resource_local_to_scene = true
+shader = ExtResource("1_jopj1")
+shader_parameter/Note_Index = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_rmj8j"]
+size = Vector2(64, 64)
+
+[node name="Note" type="Node2D"]
+script = ExtResource("1_iebwg")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_mbg6n")
+mesh = SubResource("QuadMesh_rmj8j")

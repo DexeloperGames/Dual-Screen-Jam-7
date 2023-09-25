@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://3y2qy8785ch4"]
+
+[ext_resource type="PackedScene" uid="uid://k23gk7g8k3uv" path="res://scenes/objects/playfeild.tscn" id="1_8itko"]
+
+[node name="Gameplay Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 384.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.215
+anchor_right = 0.5
+anchor_bottom = 0.215
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Playfeild" parent="Control/Control" instance=ExtResource("1_8itko")]

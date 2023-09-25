@@ -1,0 +1,178 @@
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://osc11c1s4uyx"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_154u4"]
+parameter_name = "note_color_0"
+qualifier = 1
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_3q1vr"]
+parameter_name = "note_color_1"
+qualifier = 1
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_y5gbq"]
+parameter_name = "note_color_2"
+qualifier = 1
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_2gw4k"]
+parameter_name = "note_color_3"
+qualifier = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_fmivy"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDistance" id="VisualShaderNodeVectorDistance_jxytn"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.5, 0.5)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_cduet"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_np7xl"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05]
+function = 4
+
+[sub_resource type="VisualShaderNodeSwitch" id="VisualShaderNodeSwitch_1eyml"]
+default_input_values = [0, false, 1, Vector3(1, 1, 1), 2, Vector3(1, 1, 1)]
+op_type = 4
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_o865i"]
+default_input_values = [0, 0.0, 1, 0.8, 2, 1e-05]
+function = 4
+
+[sub_resource type="VisualShaderNodeUIntParameter" id="VisualShaderNodeUIntParameter_owi0m"]
+parameter_name = "Note_Index"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_f0s3s"]
+size = Vector2(350.826, 384.711)
+expression = "switch(index){
+case 0: note_color = color1; break;
+case 1: note_color = color2; break;
+case 2: note_color = color3; break;
+case 3: note_color = color4; break;
+default: note_color = vec3(1.0);
+};"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform uint Note_Index = 0;
+global uniform vec4 note_color_0 : source_color;
+global uniform vec4 note_color_1 : source_color;
+global uniform vec4 note_color_2 : source_color;
+global uniform vec4 note_color_3 : source_color;
+
+
+
+void fragment() {
+// Input:2
+	vec2 n_out2p0 = UV;
+
+
+// Distance:3
+	vec2 n_in3p1 = vec2(0.50000, 0.50000);
+	float n_out3p0 = distance(n_out2p0, n_in3p1);
+
+
+// FloatOp:4
+	float n_in4p1 = 2.00000;
+	float n_out4p0 = n_out3p0 * n_in4p1;
+
+
+// Compare:7
+	float n_in7p1 = 0.80000;
+	bool n_out7p0 = n_out4p0 < n_in7p1;
+
+
+// UIntParameter:8
+	uint n_out8p0 = Note_Index;
+
+
+// ColorParameter:10
+	vec4 n_out10p0 = note_color_0;
+
+
+// ColorParameter:11
+	vec4 n_out11p0 = note_color_1;
+
+
+// ColorParameter:12
+	vec4 n_out12p0 = note_color_2;
+
+
+// ColorParameter:13
+	vec4 n_out13p0 = note_color_3;
+
+
+	vec3 n_out9p0;
+// Expression:9
+	n_out9p0 = vec3(0.0, 0.0, 0.0);
+	{
+		switch(n_out8p0){
+		case 0: n_out9p0 = vec3(n_out10p0.xyz); break;
+		case 1: n_out9p0 = vec3(n_out11p0.xyz); break;
+		case 2: n_out9p0 = vec3(n_out12p0.xyz); break;
+		case 3: n_out9p0 = vec3(n_out13p0.xyz); break;
+		default: n_out9p0 = vec3(1.0);
+		};
+	}
+
+
+	vec3 n_out6p0;
+// Switch:6
+	vec3 n_in6p2 = vec3(1.00000, 1.00000, 1.00000);
+	n_out6p0 = mix(n_in6p2, n_out9p0, float(n_out7p0));
+
+
+// Compare:5
+	float n_in5p1 = 1.00000;
+	bool n_out5p0 = n_out4p0 < n_in5p1;
+
+
+// Output:0
+	COLOR.rgb = n_out6p0;
+	COLOR.a = (n_out5p0 ? 1.0 : 0.0);
+
+
+}
+"
+graph_offset = Vector2(-896.019, -185.272)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(580, 280)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_fmivy")
+nodes/fragment/2/position = Vector2(-480, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVectorDistance_jxytn")
+nodes/fragment/3/position = Vector2(-100, 220)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatOp_cduet")
+nodes/fragment/4/position = Vector2(96.3832, 275.137)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCompare_np7xl")
+nodes/fragment/5/position = Vector2(273.693, 353.273)
+nodes/fragment/6/node = SubResource("VisualShaderNodeSwitch_1eyml")
+nodes/fragment/6/position = Vector2(420, 100)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCompare_o865i")
+nodes/fragment/7/position = Vector2(260, 40)
+nodes/fragment/8/node = SubResource("VisualShaderNodeUIntParameter_owi0m")
+nodes/fragment/8/position = Vector2(-560, -180)
+nodes/fragment/9/node = SubResource("VisualShaderNodeExpression_f0s3s")
+nodes/fragment/9/position = Vector2(-300, -140)
+nodes/fragment/9/size = Vector2(350.826, 384.711)
+nodes/fragment/9/input_ports = "0,2,index;1,4,color1;2,4,color2;3,4,color3;4,4,color4;"
+nodes/fragment/9/output_ports = "0,4,note_color;"
+nodes/fragment/9/expression = "switch(index){
+case 0: note_color = color1; break;
+case 1: note_color = color2; break;
+case 2: note_color = color3; break;
+case 3: note_color = color4; break;
+default: note_color = vec3(1.0);
+};"
+nodes/fragment/10/node = SubResource("VisualShaderNodeColorParameter_154u4")
+nodes/fragment/10/position = Vector2(-920, -120)
+nodes/fragment/11/node = SubResource("VisualShaderNodeColorParameter_3q1vr")
+nodes/fragment/11/position = Vector2(-920, 60)
+nodes/fragment/12/node = SubResource("VisualShaderNodeColorParameter_y5gbq")
+nodes/fragment/12/position = Vector2(-880, 140)
+nodes/fragment/13/node = SubResource("VisualShaderNodeColorParameter_2gw4k")
+nodes/fragment/13/position = Vector2(-880, 260)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 5, 0, 4, 0, 7, 0, 7, 0, 6, 0, 8, 0, 9, 0, 10, 0, 9, 1, 11, 0, 9, 2, 12, 0, 9, 3, 13, 0, 9, 4, 6, 0, 0, 0, 9, 0, 6, 1, 5, 0, 0, 1)

@@ -15,6 +15,10 @@ run/main_scene="res://scenes/ui/main_ds_ui.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/output_latency=4
+
 [autoload]
 
 Globals="*res://globals.gd"
@@ -91,4 +95,8 @@ note_color_3={
 note_texture={
 "type": "sampler2D",
 "value": "res://icon.svg"
+}
+note_shape={
+"type": "uint",
+"value": 2
 }

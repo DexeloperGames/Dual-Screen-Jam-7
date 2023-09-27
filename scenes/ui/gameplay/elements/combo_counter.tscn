@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt8y1ej0uutbx"]
+
+[ext_resource type="Script" path="res://scenes/ui/gameplay/elements/combo_counter.gd" id="1_8jojx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_usfma"]
+font_size = 20
+outline_size = 15
+outline_color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="Combo Counter" type="Node2D" groups=["Player Hit Recievers"]]
+script = ExtResource("1_8jojx")
+combo_text = "Combo: {combo}x"
+max_combo_text = "Max Combo: {max_combo}x"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Combo: 30x"
+label_settings = SubResource("LabelSettings_usfma")

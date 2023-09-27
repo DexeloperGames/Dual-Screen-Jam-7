@@ -27,9 +27,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Playfeild" parent="Control/Control" instance=ExtResource("1_8itko")]
+auto_play = true
+scroll_speed = 1000.0
 
 [node name="Gameplay HUD" parent="." instance=ExtResource("2_22hms")]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

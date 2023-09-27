@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc6mlrh68mqsf"]
+
+[ext_resource type="Script" path="res://scenes/ui/gameplay/elements/judgement_display.gd" id="1_bddbr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbi7e"]
+font_size = 46
+outline_size = 15
+outline_color = Color(0.517647, 0.517647, 0.517647, 1)
+
+[node name="Judgement Display" type="Node2D" groups=["Player Hit Recievers"]]
+script = ExtResource("1_bddbr")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="Pivot"]
+modulate = Color(0.247059, 1, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -33.5
+offset_right = 93.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Perfect!!"
+label_settings = SubResource("LabelSettings_pbi7e")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,12 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpu86v5mfb48i"]
+[gd_scene load_steps=4 format=3 uid="uid://dpu86v5mfb48i"]
 
 [ext_resource type="PackedScene" uid="uid://ciknkihlil2om" path="res://scenes/ui/gameplay/elements/hit_error_meter.tscn" id="1_7nrrp"]
+[ext_resource type="PackedScene" uid="uid://bc6mlrh68mqsf" path="res://scenes/ui/gameplay/elements/judgement_display.tscn" id="2_shb3d"]
+[ext_resource type="PackedScene" uid="uid://dt8y1ej0uutbx" path="res://scenes/ui/gameplay/elements/combo_counter.tscn" id="3_tyeo5"]
 
 [node name="Gameplay HUD" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 256.0
 offset_bottom = 192.0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Error Meter" type="Control" parent="."]
 layout_mode = 1
@@ -19,3 +29,32 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hit Error Meter" parent="Error Meter" instance=ExtResource("1_7nrrp")]
+
+[node name="Judgement" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.195
+anchor_right = 0.5
+anchor_bottom = 0.195
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Judgement Display" parent="Judgement" instance=ExtResource("2_shb3d")]
+scale = Vector2(0.665, 0.665)
+
+[node name="Combo" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.245
+anchor_top = 0.84
+anchor_right = 0.245
+anchor_bottom = 0.845
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Combo Counter" parent="Combo" instance=ExtResource("3_tyeo5")]
+scale = Vector2(0.885, 0.885)
+
+[node name="Combo Counter2" parent="Combo/Combo Counter" instance=ExtResource("3_tyeo5")]
+position = Vector2(3.265, -21.985)
+scale = Vector2(0.7, 0.7)
+display_max_combo = true

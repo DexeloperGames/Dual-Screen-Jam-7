@@ -12,8 +12,9 @@ func _ready():
 
 func generate_line(x_pos, color):
 	var line = Line2D.new()
-	line.add_point(Vector2(0,40))
-	line.add_point(Vector2(0,-40))
+	line.add_point(Vector2(0,10))
+	line.add_point(Vector2(0,-10))
+	line.width = 5.0
 	line.modulate = color
 	$"Hit Line Container".add_child(line)
 	line.position.x = x_pos

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://jprmmkkkq0b0" path="res://scenes/objects/note_column.tscn" id="1_rpp22"]
 [ext_resource type="Script" path="res://scenes/objects/playfeild.gd" id="1_w1mkr"]
-[ext_resource type="Resource" uid="uid://bx50lhq6kn0sk" path="res://data/charts/impossibletestsong copy.tres" id="2_mprwd"]
+[ext_resource type="Resource" uid="uid://bx50lhq6kn0sk" path="res://data/charts/impossibletestsong v3.tres" id="2_mprwd"]
 [ext_resource type="AudioStream" uid="uid://d1b52dbuq085r" path="res://assets/some new test song lol.wav" id="4_gpsol"]
 
 [node name="Playfeild" type="Node2D" node_paths=PackedStringArray("note_columns")]

@@ -9,6 +9,7 @@ class_name NoteColumn
 @export var note_hit_time_array : PackedFloat32Array
 @export var scroll_speed = 384.0*2
 @export var note_scene : PackedScene = preload("res://scenes/objects/note.tscn")
+@export var use_snap_colors : bool = false
 
 var note_action_array : Array = ["note_0","note_1","note_2","note_3"]
 var note_array : Array[Note]
@@ -52,10 +53,13 @@ func spawn_notes():
 		new_note.hit_time = hit_time
 		new_note.parent_column = self
 		new_note.note_index = note_index
+		new_note.use_snap_colors = use_snap_colors
+		new_note.note_snap = Globals.get_beat_snap(fposmod(hit_time*512.0/60.0,1.0))
 		note_scroller.add_child(new_note)
 		new_note.position.y = hit_time
 		note_array[i] = new_note
 		new_note.update_note_index()
+		new_note.update_note_snap()
 		i += 1
 	update_scroll_speed()
 

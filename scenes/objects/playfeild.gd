@@ -4,17 +4,19 @@ extends Node2D
 @export var note_columns : Array[NoteColumn]
 @export var auto_play : bool = false
 @export var scroll_speed : float = 384*2
+@export var use_snap_colors : bool = false
 @export_range(0.01, 10, 0.01) var speed_scale : float = 1.0
 var song_start_time : float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	scroll_speed /= speed_scale
 	$AudioStreamPlayer.pitch_scale = speed_scale
-	load_chart()
 	for note_column in note_columns:
 		note_column.auto_play = auto_play
 		note_column.scroll_speed = scroll_speed
 		note_column.update_scroll_speed()
+		note_column.use_snap_colors = use_snap_colors
+	load_chart()
 	song_start_time = Time.get_ticks_usec()/1.0e+6
 	pass # Replace with function body.
 

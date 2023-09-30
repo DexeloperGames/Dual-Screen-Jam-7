@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=43 format=3 uid="uid://osc11c1s4uyx"]
+[gd_resource type="VisualShader" load_steps=46 format=3 uid="uid://osc11c1s4uyx"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_154u4"]
 parameter_name = "note_color_0"
@@ -142,6 +142,16 @@ default: n = 0.0;
 parameter_name = "note_shape"
 param_type = 2
 
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_fk8ba"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeSwitch" id="VisualShaderNodeSwitch_d3quq"]
+default_input_values = [0, false, 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
+op_type = 4
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_dknsi"]
+parameter_name = "Use_Snap_Colors"
+
 [sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_np7xl"]
 default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05]
 function = 4
@@ -173,6 +183,7 @@ code = "shader_type canvas_item;
 render_mode blend_mix;
 
 global uniform uint note_shape = 0;
+uniform bool Use_Snap_Colors;
 uniform uint Note_Index = 0;
 global uniform vec4 note_color_0 : source_color;
 global uniform vec4 note_color_1 : source_color;
@@ -278,6 +289,14 @@ void fragment() {
 	}
 
 
+// BooleanParameter:46
+	bool n_out46p0 = Use_Snap_Colors;
+
+
+// Input:44
+	vec4 n_out44p0 = COLOR;
+
+
 // UIntParameter:8
 	uint n_out8p0 = Note_Index;
 
@@ -312,10 +331,15 @@ void fragment() {
 	}
 
 
+	vec3 n_out45p0;
+// Switch:45
+	n_out45p0 = mix(n_out9p0, vec3(n_out44p0.xyz), float(n_out46p0));
+
+
 	vec3 n_out6p0;
 // Switch:6
 	vec3 n_in6p2 = vec3(1.00000, 1.00000, 1.00000);
-	n_out6p0 = mix(n_in6p2, n_out9p0, float(n_out42p0 > 0.0 ? true : false));
+	n_out6p0 = mix(n_in6p2, n_out45p0, float(n_out42p0 > 0.0 ? true : false));
 
 
 // UIntParameter:41
@@ -374,7 +398,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-213.161, -98.3703)
+graph_offset = Vector2(-528.465, -629.455)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(2520, 580)
@@ -490,4 +514,10 @@ default: n = 0.0;
 };"
 nodes/fragment/43/node = SubResource("VisualShaderNodeParameterRef_7ga3h")
 nodes/fragment/43/position = Vector2(960, 1400)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 5, 0, 4, 0, 7, 0, 8, 0, 9, 0, 10, 0, 9, 1, 11, 0, 9, 2, 12, 0, 9, 3, 13, 0, 9, 4, 6, 0, 0, 0, 9, 0, 6, 1, 20, 0, 21, 0, 21, 0, 14, 0, 21, 1, 16, 0, 14, 0, 18, 0, 16, 0, 18, 1, 18, 0, 15, 0, 21, 1, 17, 0, 17, 0, 19, 1, 15, 0, 19, 0, 20, 0, 22, 0, 22, 0, 23, 0, 23, 0, 24, 0, 23, 1, 24, 1, 33, 0, 26, 0, 33, 1, 26, 1, 39, 0, 25, 0, 33, 0, 27, 0, 27, 0, 28, 0, 33, 1, 28, 1, 28, 0, 37, 0, 26, 0, 37, 1, 35, 0, 29, 0, 35, 1, 29, 1, 35, 0, 30, 0, 30, 0, 31, 0, 35, 1, 31, 1, 31, 0, 32, 0, 29, 0, 32, 1, 25, 0, 33, 0, 25, 0, 34, 1, 34, 0, 35, 0, 32, 0, 36, 0, 36, 0, 38, 1, 37, 0, 38, 0, 41, 0, 40, 0, 17, 0, 40, 2, 37, 0, 40, 3, 5, 0, 40, 1, 40, 0, 0, 1, 43, 0, 42, 0, 32, 0, 42, 3, 18, 0, 42, 2, 7, 0, 42, 1, 42, 0, 6, 0)
+nodes/fragment/44/node = SubResource("VisualShaderNodeInput_fk8ba")
+nodes/fragment/44/position = Vector2(-60, -340)
+nodes/fragment/45/node = SubResource("VisualShaderNodeSwitch_d3quq")
+nodes/fragment/45/position = Vector2(466.552, -239.013)
+nodes/fragment/46/node = SubResource("VisualShaderNodeBooleanParameter_dknsi")
+nodes/fragment/46/position = Vector2(-360, -400)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 4, 0, 4, 0, 5, 0, 4, 0, 7, 0, 8, 0, 9, 0, 10, 0, 9, 1, 11, 0, 9, 2, 12, 0, 9, 3, 13, 0, 9, 4, 6, 0, 0, 0, 20, 0, 21, 0, 21, 0, 14, 0, 21, 1, 16, 0, 14, 0, 18, 0, 16, 0, 18, 1, 18, 0, 15, 0, 21, 1, 17, 0, 17, 0, 19, 1, 15, 0, 19, 0, 20, 0, 22, 0, 22, 0, 23, 0, 23, 0, 24, 0, 23, 1, 24, 1, 33, 0, 26, 0, 33, 1, 26, 1, 39, 0, 25, 0, 33, 0, 27, 0, 27, 0, 28, 0, 33, 1, 28, 1, 28, 0, 37, 0, 26, 0, 37, 1, 35, 0, 29, 0, 35, 1, 29, 1, 35, 0, 30, 0, 30, 0, 31, 0, 35, 1, 31, 1, 31, 0, 32, 0, 29, 0, 32, 1, 25, 0, 33, 0, 25, 0, 34, 1, 34, 0, 35, 0, 32, 0, 36, 0, 36, 0, 38, 1, 37, 0, 38, 0, 41, 0, 40, 0, 17, 0, 40, 2, 37, 0, 40, 3, 5, 0, 40, 1, 40, 0, 0, 1, 43, 0, 42, 0, 32, 0, 42, 3, 18, 0, 42, 2, 7, 0, 42, 1, 42, 0, 6, 0, 46, 0, 45, 0, 44, 0, 45, 1, 9, 0, 45, 2, 45, 0, 6, 1)

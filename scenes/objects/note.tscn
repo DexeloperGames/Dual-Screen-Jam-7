@@ -6,6 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbg6n"]
 resource_local_to_scene = true
 shader = ExtResource("1_jopj1")
+shader_parameter/Use_Snap_Colors = null
 shader_parameter/Note_Index = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_rmj8j"]
